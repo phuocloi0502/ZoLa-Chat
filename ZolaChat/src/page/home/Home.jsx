@@ -1,30 +1,50 @@
 import "./home.scss";
 import React from "react";
 import { useState, useEffect } from "react";
-import { Login } from "../log_in/Login";
-import { SignUp } from "../sign_up/SignUp";
+import { Login } from "../../components/log_in/Login";
+import { SignUp } from "../../components/sign_up/SignUp";
 import { FaSmileBeam } from "react-icons/fa";
 import { setShowSignUpForm } from "../../redux/slide/MyState";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "../../components/menu/Menu";
+import { Outlet } from "react-router-dom";
+import { FaBell } from "react-icons/fa";
 export const Home = (props) => {
   // init
   const dispatch = useDispatch();
   const isShowSignUpForm = useSelector((state) => state.MyState.showSignUpForm);
+  const isLogin = useSelector((state) => state.MyState.isLogin);
   // handle
 
   return (
     <div className="home-page-wrap">
-      <h1>
-        Chào mừng bạn đến với Zola Chat
-        <div className="icon-area">
-          <FaSmileBeam />
-          <FaSmileBeam />
-          <FaSmileBeam />
+      {isLogin ? (
+        <div className="content-area">
+          <div className="navigate-wrap">
+            <Navigate />
+          </div>
+          <div className="main-wrap">
+            <div className="header-area">
+              <div className="avatar-area"></div>
+              <span> Hi ! LoiNoble</span>
+              <strong>
+                {" "}
+                <FaBell />
+              </strong>
+            </div>
+            <div className="main-content-area">
+              <Outlet />
+            </div>
+          </div>
         </div>
-      </h1>
-      <br />
-      <h2>Zola Chat, Thêm bạn - Thêm vui !!!</h2>
-      {isShowSignUpForm ? <SignUp /> : <Login />}
+      ) : (
+        <div className="login-or-signup-area">
+          <h2>
+            Zola Chat <br /> Thêm bạn - Thêm vui !
+          </h2>
+          {isShowSignUpForm ? <SignUp /> : <Login />}
+        </div>
+      )}
     </div>
   );
 };

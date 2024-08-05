@@ -1,0 +1,18 @@
+.login-wrap {
+  width: 95%;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+
+  .my-button-link {
+    font-style: italic;
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .login-wrap {
+    width: 450px;
+  }
+}

@@ -1,14 +1,58 @@
 .home-page-wrap {
-  text-align: center;
-  .icon-area {
-    padding: 10px 0 0 0;
-    color: rgb(251, 242, 0);
+  width: 100%;
+  height: 100%;
+  .content-area {
+    padding: 0;
+    height: 100vh;
+    display: flex;
+
+    .navigate-wrap {
+      width: 256px;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    .main-wrap {
+      margin-left: 256px;
+      width: calc(100% - 256px);
+      flex: 4;
+      position: relative;
+      .header-area {
+        background-color: white;
+        padding: 5px;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        gap: 20px;
+        color: black;
+        font-size: 1.1rem;
+        strong {
+          font-size: 1.3rem;
+        }
+        .avatar-area {
+          width: 50px;
+          height: 50px;
+          background-color: rgb(2, 176, 250);
+          border-radius: 50%;
+        }
+      }
+      .main-content-area {
+        height: 100%;
+      }
+    }
   }
-  h1 {
-    color: rgb(0, 255, 38);
-    font-weight: 700;
-  }
-  h2 {
-    color: rgb(255, 255, 255);
+  .login-or-signup-area {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h2 {
+      color: rgb(255, 255, 255);
+      padding-bottom: 10px;
+    }
   }
 }

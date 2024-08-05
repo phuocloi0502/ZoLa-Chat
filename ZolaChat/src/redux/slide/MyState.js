@@ -3,13 +3,16 @@ export const MyState = createSlice({
   name: "MyState",
   initialState: {
     showSignUpForm: false,
+    isLogin: false,
   },
   reducers: {
     setShowSignUpForm: (state, action) => {
       state.showSignUpForm = action.payload;
-      console.log(state.showSignUpForm);
+    },
+    setIsLogin: (state, action) => {
+      state.isLogin = action.payload;
     },
   },
 });
-export const { setShowSignUpForm } = MyState.actions;
+export const { setShowSignUpForm, setIsLogin } = MyState.actions;
 export default MyState.reducer;
