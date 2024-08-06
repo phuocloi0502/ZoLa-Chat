@@ -1,7 +1,46 @@
 .desktop-menu {
   height: 100%;
+  width: 256px;
   display: block;
+  .ant-menu {
+    height: 100%;
+  }
 }
 .mobile-menu {
   display: none;
+}
+@media screen and (max-width: 768px) {
+  .desktop-menu {
+    height: 100%;
+    display: none;
+  }
+  .mobile-menu {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+
+    .ant-menu::before {
+      display: none;
+    }
+    .ant-menu-horizontal {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      height: 60px;
+      align-items: center;
+
+      svg {
+        width: 50px;
+        height: 25px;
+      }
+      .ant-menu-title-content {
+        display: block;
+      }
+      .ant-menu-overflow-item {
+      }
+    }
+  }
 }

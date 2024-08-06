@@ -1,5 +1,5 @@
-import { Menu } from "antd";
-import React, { useEffect } from "react";
+import { Drawer, Menu } from "antd";
+import React, { useEffect, useState } from "react";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { FaUserFriends, FaRegUserCircle } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
@@ -29,10 +29,29 @@ const items = [
     icon: <CiLogout />,
   },
 ];
+const itemsMobile = [
+  {
+    key: "chat",
+    icon: <IoChatbubblesOutline />,
+  },
+  {
+    key: "friends",
+    icon: <FaUserFriends />,
+  },
+  {
+    key: "my_page",
+    icon: <FaRegUserCircle />,
+  },
+  {
+    key: "sign_out",
+    icon: <CiLogout />,
+  },
+];
 
 export const Navigate = (props) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
+  const [openDrawer, setOpenDrawer] = useState(true);
   const defaultSelectedKey = "chat";
   const onClick = (e) => {
     if (e.key == "sign_out") {
@@ -44,16 +63,29 @@ export const Navigate = (props) => {
   useEffect(() => {
     onClick({ key: defaultSelectedKey });
   }, []);
+  const onClose = () => {
+    setOpenDrawer(false);
+  };
   return (
-    <div className="desktop-menu">
-      <Menu
-        onClick={onClick}
-        items={items}
-        style={{ height: "100%" }}
-        defaultSelectedKeys={[defaultSelectedKey]}
-        defaultOpenKeys={[defaultSelectedKey]}
-        mode="inline"
-      />
-    </div>
+    <>
+      <div className="desktop-menu">
+        <Menu
+          onClick={onClick}
+          items={items}
+          defaultSelectedKeys={[defaultSelectedKey]}
+          defaultOpenKeys={[defaultSelectedKey]}
+          mode="inline"
+        />
+      </div>
+
+      <div className="mobile-menu">
+        <Menu
+          onClick={onClick}
+          mode="horizontal"
+          items={itemsMobile}
+          defaultSelectedKeys={[defaultSelectedKey]}
+        />
+      </div>
+    </>
   );
 };

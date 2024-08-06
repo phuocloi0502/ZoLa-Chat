@@ -3,13 +3,14 @@ import { MdOutlineMailOutline, MdLockOutline } from "react-icons/md";
 import { Card, Form, Input, Button, Row, Col } from "antd";
 import { Link } from "react-router-dom";
 import "./login.scss";
-import logoWeb from "../../assets/L-square.png";
+import logoWeb from "../../assets/L.gif";
 import { useDispatch } from "react-redux";
 import { setShowSignUpForm } from "../../redux/slide/MyState";
 import { setIsLogin } from "../../redux/slide/MyState";
 export const Login = (props) => {
   // init
   const dispatch = useDispatch();
+
   // handle
   const handleLogin = (value) => {
     console.log(value);
@@ -24,8 +25,8 @@ export const Login = (props) => {
             src={logoWeb}
             alt=""
             style={{
-              width: 200,
-              height: 200,
+              width: 150,
+              height: 150,
             }}
           />
         </Form.Item>

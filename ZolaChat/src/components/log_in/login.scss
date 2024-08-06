@@ -3,9 +3,10 @@
   margin: 0 auto;
   border-radius: 10px;
   background-color: white;
-  padding: 20px;
+  padding: 5px;
   text-align: center;
-
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   .my-button-link {
     font-style: italic;
     font-size: 1rem;
@@ -14,5 +15,7 @@
 @media screen and (min-width: 768px) {
   .login-wrap {
     width: 450px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+      rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   }
 }

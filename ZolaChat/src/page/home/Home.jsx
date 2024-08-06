@@ -8,7 +8,8 @@ import { setShowSignUpForm } from "../../redux/slide/MyState";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "../../components/menu/Menu";
 import { Outlet } from "react-router-dom";
-import { FaBell } from "react-icons/fa";
+
+import { Header } from "../../components/header/Header";
 export const Home = (props) => {
   // init
   const dispatch = useDispatch();
@@ -24,14 +25,7 @@ export const Home = (props) => {
             <Navigate />
           </div>
           <div className="main-wrap">
-            <div className="header-area">
-              <div className="avatar-area"></div>
-              <span> Hi ! LoiNoble</span>
-              <strong>
-                {" "}
-                <FaBell />
-              </strong>
-            </div>
+            <Header />
             <div className="main-content-area">
               <Outlet />
             </div>
