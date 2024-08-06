@@ -24,6 +24,12 @@
     .ant-menu::before {
       display: none;
     }
+    .custom-badge {
+      sup {
+        display: flex;
+        align-items: center;
+      }
+    }
     .ant-menu-horizontal {
       width: 100%;
       display: flex;

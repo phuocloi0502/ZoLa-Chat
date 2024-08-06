@@ -1,4 +1,4 @@
-import { Drawer, Menu } from "antd";
+import { Drawer, Menu, Badge } from "antd";
 import React, { useEffect, useState } from "react";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { FaUserFriends, FaRegUserCircle } from "react-icons/fa";
@@ -32,11 +32,20 @@ const items = [
 const itemsMobile = [
   {
     key: "chat",
-    icon: <IoChatbubblesOutline />,
+    icon: (
+      <Badge count={599} className="custom-badge">
+        <IoChatbubblesOutline />
+      </Badge>
+    ),
   },
   {
     key: "friends",
-    icon: <FaUserFriends />,
+
+    icon: (
+      <Badge count={599} className="custom-badge">
+        <FaUserFriends />
+      </Badge>
+    ),
   },
   {
     key: "my_page",

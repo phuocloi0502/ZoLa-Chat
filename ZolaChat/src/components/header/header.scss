@@ -22,8 +22,10 @@
     border-radius: 50%;
   }
   .bell-icon {
-    font-size: 1.3rem;
     position: relative;
     top: 2px;
+    > span {
+      font-size: 1.7rem;
+    }
   }
 }

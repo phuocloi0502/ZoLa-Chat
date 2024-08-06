@@ -25,7 +25,7 @@ export const Login = (props) => {
             src={logoWeb}
             alt=""
             style={{
-              width: 150,
+              width: 120,
               height: 150,
             }}
           />

@@ -3,7 +3,7 @@ import { MdOutlineMailOutline, MdLockOutline } from "react-icons/md";
 import { Card, Form, Input, Button, Typography, Flex } from "antd";
 
 const { Text, Link } = Typography;
-import logoWeb from "../../assets/L-square.png";
+import logoWeb from "../../assets/L.gif";
 import { useDispatch } from "react-redux";
 import { setShowSignUpForm } from "../../redux/slide/MyState";
 export const SignUp = (props) => {
@@ -25,8 +25,8 @@ export const SignUp = (props) => {
             src={logoWeb}
             alt=""
             style={{
-              width: 200,
-              height: 200,
+              width: 120,
+              height: 150,
             }}
           />
         </Form.Item>
