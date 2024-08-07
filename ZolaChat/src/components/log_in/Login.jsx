@@ -1,24 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { MdOutlineMailOutline, MdLockOutline } from "react-icons/md";
-import { Card, Form, Input, Button, Row, Col } from "antd";
+import { Card, Form, Input, Button, Row, Col, message, Spin } from "antd";
 import { Link } from "react-router-dom";
 import "./login.scss";
 import logoWeb from "../../assets/L.gif";
 import { useDispatch } from "react-redux";
 import { setShowSignUpForm } from "../../redux/slide/MyState";
 import { setIsLogin } from "../../redux/slide/MyState";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 export const Login = (props) => {
   // init
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = useState(false);
   // handle
-  const handleLogin = (value) => {
-    console.log(value);
-    dispatch(setIsLogin(true));
+  const handleLogin = async (value) => {
+    setLoading(true);
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        value.email,
+        value.password
+      );
+      const user = userCredential.user;
+      const idToken = await user.getIdToken();
+      console.log("ID token: ", idToken);
+      localStorage.setItem("token", idToken);
+      dispatch(setIsLogin(true));
+      message.success("Đăng nhập thành công!");
+    } catch (error) {
+      message.error("Email hoặc mật khẩu không đúng ! ");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="login-wrap">
+      <Spin spinning={loading} fullscreen={true} />
       <Form name="loginForm" onFinish={handleLogin}>
         <Form.Item>
           <img
@@ -37,6 +56,10 @@ export const Login = (props) => {
               required: true,
               message: "Vui lòng nhập Email!",
             },
+            {
+              pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Email không hợp lệ!",
+            },
           ]}
         >
           <Input
@@ -44,6 +67,7 @@ export const Login = (props) => {
             placeholder="Nhập email..."
             type="email"
             size="large"
+            autoFocus
           />
         </Form.Item>
         <Form.Item
@@ -60,6 +84,7 @@ export const Login = (props) => {
             placeholder="Nhập mật khẩu..."
             type="password"
             size="large"
+            autoComplete="off"
           />
         </Form.Item>
         <Form.Item>

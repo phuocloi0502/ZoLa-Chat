@@ -1,4 +1,4 @@
-import { Drawer, Menu, Badge } from "antd";
+import { Drawer, Menu, Badge, message, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { FaUserFriends, FaRegUserCircle } from "react-icons/fa";
@@ -58,13 +58,22 @@ const itemsMobile = [
 ];
 
 export const Navigate = (props) => {
+  //init
   const nav = useNavigate();
   const dispatch = useDispatch();
-  const [openDrawer, setOpenDrawer] = useState(true);
   const defaultSelectedKey = "chat";
+  const [loading, setLoading] = useState(false);
+  // handle
   const onClick = (e) => {
     if (e.key == "sign_out") {
+      localStorage.removeItem("token");
       dispatch(setIsLogin(false));
+      message.info("Đã đăng xuất !");
+      setLoading(true);
+      setTimeout(() => {
+        nav("/ZoLa-Chat/");
+        setLoading(false);
+      }, 500);
     } else {
       nav(e.key);
     }
@@ -78,6 +87,7 @@ export const Navigate = (props) => {
   return (
     <>
       <div className="desktop-menu">
+        <Spin spinning={loading} fullscreen={true} />
         <Menu
           onClick={onClick}
           items={items}

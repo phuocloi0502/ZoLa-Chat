@@ -1,25 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { MdOutlineMailOutline, MdLockOutline } from "react-icons/md";
-import { Card, Form, Input, Button, Typography, Flex } from "antd";
+import {
+  Card,
+  Form,
+  Input,
+  Button,
+  Typography,
+  Flex,
+  Spin,
+  message,
+} from "antd";
+import { auth } from "../../firebase";
 
 const { Text, Link } = Typography;
 import logoWeb from "../../assets/L.gif";
 import { useDispatch } from "react-redux";
 import { setShowSignUpForm } from "../../redux/slide/MyState";
-export const SignUp = (props) => {
-  const handleLogin = (value) => {
-    console.log(value);
-  };
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+export const Resigter = (props) => {
   // init
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = useState(false);
+  const [form] = Form.useForm();
   // handle
-  const handleShowSignUpForm = () => {
-    dispatch(setShowSignUpForm(false));
+  const handleLogin = async (value) => {
+    setLoading(true);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        value.email,
+        value.password
+      );
+      dispatch(setShowSignUpForm(false));
+      form.resetFields();
+      message.success("Đăng ký thành công !");
+    } catch (error) {
+      if (error.message == "Firebase: Error (auth/email-already-in-use).") {
+        message.error("Tài khoản này đã tồn tại !");
+      } else {
+        message.error(error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
+
   return (
     <div className="login-wrap">
-      <Form name="loginForm" onFinish={handleLogin}>
+      <Spin spinning={loading} fullscreen={true} />
+      <Form name="loginForm" onFinish={handleLogin} form={form}>
         <Form.Item>
           <img
             src={logoWeb}
@@ -37,6 +67,10 @@ export const SignUp = (props) => {
               required: true,
               message: "Vui lòng nhập Email!",
             },
+            {
+              pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Email không hợp lệ!",
+            },
           ]}
         >
           <Input
@@ -44,6 +78,7 @@ export const SignUp = (props) => {
             placeholder="Nhập email..."
             type="email"
             size="large"
+            autoFocus
           />
         </Form.Item>
         <Form.Item
@@ -52,6 +87,10 @@ export const SignUp = (props) => {
             {
               required: true,
               message: "Vui lòng nhập Password!",
+            },
+            {
+              min: 6,
+              message: "Mật khẩu phải có ít nhất 6 kí tự !",
             },
           ]}
         >

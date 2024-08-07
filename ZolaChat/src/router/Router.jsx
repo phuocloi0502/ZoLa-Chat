@@ -1,6 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Login } from "../components/log_in/Login";
-import { SignUp } from "../components/sign_up/SignUp";
 import App from "../App";
 import { Home } from "../page/home/Home";
 import { Chat } from "../page/chat/Chat";
